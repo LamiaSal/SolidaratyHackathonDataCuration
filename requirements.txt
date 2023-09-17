@@ -2,3 +2,7 @@ numpy
 accelerate
 torch
 transformers
+folium
+pandas
+streamlit
+ctranslate2
