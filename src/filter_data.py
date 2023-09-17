@@ -183,36 +183,10 @@ current_time = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 request['Horodateur'].fillna(current_time, inplace=True)
 
 
-def get_text_score(row):
-    score = 0
-
-    '''
-    need = row['need'].lower()
-
-    if 'urgent' in need:
-        score+=1500
-    if 'death' in need:
-        score+=1500
-    if 'cold' in need:
-        score += 500
-    if 'got food' in need:
-        score-=500
-    if 'few tents' in need:
-        score -= 250
-    '''
-    return score
 
 
-def get_score_temp(row):
-    score = 0
-    need = row['need'].lower()
-    long, lat = row['coor'].split(',')
-    categories = to_category(need)
-    cold_need = (HelpCategory.HOUSE in categories) or (HelpCategory.CLOTHES in categories)
-    average_temp = get_temp(long, lat)
-    if cold_need and average_temp < 283:
-        score += 1000
-    return score
+
+
 
 
 def calculate_score(row):
@@ -222,7 +196,9 @@ def calculate_score(row):
 
     text_score = get_text_score(row)
 
-    return base_score + text_score
+    temp_score = get_score_temp(row)
+
+    return base_score + text_score + temp_score
 
 def get_temp(lat, lon):
   url = f'https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API_KEY}'
@@ -267,6 +243,7 @@ def get_score_temp(row):
     score = 0
     need = row[NEED_COL]
     needs = need.split(' ')
+    # tent, clothes or cover
     if ('الخيام' not in needs) and ('ولملابس' not in needs) and ('الأغطية' not in needs):
       return score
 
@@ -281,3 +258,24 @@ def get_score_temp(row):
     if average_temp < 273:
         score += 1000
     return score
+
+def sort_request(request):
+
+    scores = []
+    for index, row in requests.iterrows():
+        scores.append(calculate_score(row))
+
+    requests['score'] = scores
+
+    requests = requests.sort_values(by='score', ascending=False)
+
+    return requests
+
+request= parse_gg_sheet(REQUESTS_URL)
+sort_request(request)
+
+
+
+
+
+
