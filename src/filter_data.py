@@ -235,3 +235,49 @@ def get_temp(lat, lon):
   else:
       print(f'Error: Unable to fetch weather data. Status code: {response.status_code}')
   return temp
+
+NEED_COL =  'ما هي احتياجاتك؟ (أضفها إذا لم يتم ذكرها)'
+COOR_COL = 'هل يمكنك تقديم الإحداثيات الدقيقة للموقع؟ (ادا كنت لا توجد بعين المكان) متلاً \n31.01837503440344, -6.781405948842175'
+
+def get_text_score(row):
+    score = 0
+
+    need = row[NEED_COL]
+    needs = need.split(' ')
+    if 'وماء' in needs:#water
+      score += 500
+    if 'طعام' in needs:#food
+      score += 500
+    if 'إغاثة' in needs:#secours
+      score+=500
+    if 'لنقود' in needs: #secours
+      score += 500
+    if 'الخيام' in needs: #tent
+      score += 500
+    if 'ولملابس' in needs:#clothes
+      score += 250
+    if 'الأغطية' in needs: #covers
+      score += 250
+    if 'أفرشة' in needs: #matress
+      score+=100
+
+    return score
+
+def get_score_temp(row):
+    score = 0
+    need = row[NEED_COL]
+    needs = need.split(' ')
+    if ('الخيام' not in needs) and ('ولملابس' not in needs) and ('الأغطية' not in needs):
+      return score
+
+
+    lon, lat = row[COOR_COL].split(',')
+    lon = lon.strip()
+    lat = lat.strip()
+
+    average_temp = get_temp(lon, lat)
+    if average_temp < 283:
+        score += 1000
+    if average_temp < 273:
+        score += 1000
+    return score
