@@ -17,3 +17,5 @@ Please clone the following repository https://github.com/facebookresearch/seamle
 ## Other
 ### Datasets :
 Biggeer dataset : https://github.com/AIOXLABS/DBert
+Other darija datasets: https://github.com/nainiayoub/moroccan-darija-datasets
+Darija Bert: https://github.com/AIOXLABS/DBert/blob/main/Data/MTCD.csv
