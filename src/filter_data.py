@@ -259,7 +259,7 @@ def get_score_temp(row):
         score += 1000
     return score
 
-def sort_request(request):
+def sort_request(requests):
 
     scores = []
     for index, row in requests.iterrows():
