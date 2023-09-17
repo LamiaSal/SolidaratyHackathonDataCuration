@@ -271,11 +271,11 @@ def get_score_temp(row):
       return score
 
 
-    lon, lat = row[COOR_COL].split(',')
+    lat, lon = row[COOR_COL].split(',')
     lon = lon.strip()
     lat = lat.strip()
 
-    average_temp = get_temp(lon, lat)
+    average_temp = get_temp(lat, lon)
     if average_temp < 283:
         score += 1000
     if average_temp < 273:
