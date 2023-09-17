@@ -10,11 +10,14 @@ For that, we focused on 3 main tasks on this repository :
 
 ## Data cleaning and analysis
 
-### summary of what has been done
+data gathering and cleaning of data to target the most urgent request.
 
+code may be found under notebooks/tabular_data_curation/jules.ipynb ad well as src/filter_data.py
 
 ## Darija to english 
 the code may be found under notebooks/audio_project_Darija2Eng.ipynb
+
+You'll find a code to compare results on sample of data, and code to translate the csv forms.
 
 ## Speech-to-text
 For the Speech To Text, the idea was to use a pretrained model such as SeamlessM4T and to tune it on a dataset for darija, here Dvoice.
