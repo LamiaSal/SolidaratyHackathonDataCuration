@@ -5,14 +5,20 @@ the objective of the project was to contribute to the improvement of the interac
 
 For that, we focused on 3 main tasks on this repository :
 - data cleaning, and analysis of the 3 open sourced forms
+- Standardizing data of locations in the forms
 - translation darija to english, for the form standardization
-- speech to Text, for the people who sen information through whatsapp and not via the forms 
+- speech to Text, for the people who sen information through whatsapp and not via the forms
+- 
 
 ## Data cleaning and analysis
 
 data gathering and cleaning of data to target the most urgent request.
 
 code may be found under notebooks/tabular_data_curation/jules.ipynb ad well as src/filter_data.py
+
+## Standardizing data of locations
+
+https://github.com/vict0rsch/morocco-hackathon-gps
 
 ## Darija to english 
 the code may be found under notebooks/audio_project_Darija2Eng.ipynb
