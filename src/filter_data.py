@@ -210,7 +210,7 @@ def get_score_temp(row):
     categories = to_category(need)
     cold_need = (HelpCategory.HOUSE in categories) or (HelpCategory.CLOTHES in categories)
     average_temp = get_temp(long, lat)
-    if cold_need and average_temp < 10:
+    if cold_need and average_temp < 283:
         score += 1000
     return score
 
@@ -224,4 +224,14 @@ def calculate_score(row):
 
     return base_score + text_score
 
-print(calculate_score(request.iloc[0]))
+def get_temp(lat, lon):
+  url = f'https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API_KEY}'
+
+  response = requests.get(url)
+
+  if response.status_code == 200:
+      data = response.json()
+      temp = sum([single_point['main']['temp_min'] for single_point in data['list']])/40
+  else:
+      print(f'Error: Unable to fetch weather data. Status code: {response.status_code}')
+  return temp
