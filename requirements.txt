@@ -6,3 +6,10 @@ folium
 pandas
 streamlit
 ctranslate2
+datasets
+scikit-learn
+torchaudio
+soundfile
+librosa
+fairseq2==0.1.*
+pydoda
