@@ -224,10 +224,12 @@ def get_text_score(row):
       score += 500
     if 'طعام' in needs:#food
       score += 500
+    if 'مساعدة طبية' in needs: #medical
+        score += 1000
     if 'إغاثة' in needs:#secours
-      score+=500
+      score+=800
     if 'لنقود' in needs: #secours
-      score += 500
+      score += 800
     if 'الخيام' in needs: #tent
       score += 500
     if 'ولملابس' in needs:#clothes
