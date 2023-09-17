@@ -6,7 +6,7 @@
 *.json
 #*.wav
 #*.csv
-data
+dvoice
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
@@ -138,3 +138,6 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+
+lamia.ipynb
